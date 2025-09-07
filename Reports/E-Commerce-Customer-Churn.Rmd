@@ -1,0 +1,130 @@
+---
+title: "E-commerce Customer Churn Analysis"
+author: "Darshan Thorbole"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(scales)
+library(dplyr)
+library(patchwork)
+library(ggplot2)
+library(readr)
+library(scales)
+library(tinytex)
+```
+
+#Introduction
+
+Customer churn has increased over the last 6 months for the e-commerce company.
+This analysis explores why customers are churning and provides data-driven recommendations to reduce churn.
+
+#Dataset Preparation
+```{r loading datasets}
+# Load dataset
+churn <- read_csv("Ecommerce_customer_churn.csv") |>
+  clean_names()
+
+
+```
+#Data Cleaning
+```{r data cleaning}
+# Remove duplicates
+churn <- churn |> distinct()
+
+# Handle missing values (example)
+churn <- churn %>%
+  mutate(
+    tenure = ifelse(is.na(tenure), median(tenure, na.rm = TRUE), tenure),
+    satisfaction_score = ifelse(is.na(satisfaction_score), median(satisfaction_score, na.rm = TRUE), satisfaction_score)
+  )
+
+
+
+# Convert churn flag to labels
+churn <- churn %>%
+  mutate(churn = factor(churn, levels = c(0,1), labels = c("Active","Churned")))
+
+
+```
+#Exploratory Data Analysis And viualizations
+
+```{r EDA}
+# 1.Churn Distribution
+p1 <- ggplot(churn, aes(x=churn, fill=churn)) +
+  geom_bar() +
+  scale_fill_manual(values = c("Active" = "steelblue", "Churned" = "tomato")) + 
+  labs(title="Customer Churn Distribution", x="Churn", y="Count") +
+  theme_minimal()
+
+# 2. Churn by Gender
+p2 <- ggplot(churn, aes(x=gender, fill=churn)) +
+  geom_bar(position="fill") +
+  scale_fill_manual(values = c("Active" = "steelblue", "Churned" = "tomato")) + 
+  scale_y_continuous(labels=scales::percent) +
+  labs(title="Churn % by Gender", y="Percentage") +
+  theme_minimal()
+
+# 3. Churn by Payment Mode
+p3 <- ggplot(churn, aes(x=preferred_payment_mode, fill=churn)) +
+  geom_bar(position="fill") +
+  scale_fill_manual(values = c("Active" = "steelblue", "Churned" = "tomato")) + 
+  scale_y_continuous(labels=scales::percent) +
+  labs(title="Churn % by Payment Mode", y="Percentage") +
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle=45, hjust=1))
+
+# 4. Order Count Distribution: Churned vs Active
+p4 <- ggplot(churn, aes(x=churn, y=order_count, fill=churn)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Active" = "steelblue", "Churned" = "tomato")) + 
+  labs(title="Order Count Distribution: Churned vs Active") +
+  theme_minimal()
+
+# Print plots
+print(p1)
+print(p2)
+print(p3)
+print(p4)
+```
+#Key Insights
+
+Overall churn rate = **16.8%**.
+
+Customers with low order frequency churn more.
+
+Complaints and low satisfaction scores are strongly linked to churn.
+
+Certain payment modes have higher churn rates.
+
+#Recommendations
+
+1.Improve customer support → faster resolution of complaints.
+
+2.Retention offers → loyalty points, cashback for frequent buyers.
+
+3.Personalized marketing → target churn-risk customers with coupons.
+
+4.Improve experience → reduce delivery delays, optimize payment options.
+
+##Conclusion
+
+This churn analysis highlights key drivers of customer attrition.
+By addressing these areas, the company can reduce churn and increase customer lifetime value (**CLV**).
+
+
+
+
+
+
+
+
+
