@@ -6,7 +6,7 @@ The goal is to identify the **key drivers of churn** and recommend **strategies 
 
 The analysis is done in **R (RStudio)** using the **E-commerce Customer Churn dataset** from Kaggle.  
 
-👉 [View Full Report (HTML)] (https://thorboledarshan-coder.github.io/E-Commerce-Customer-Churn/E-Commerce-Customer-Churn.html). 
+👉 [View Full Report (HTML)] (https://thorboledarshan-coder.github.io/case study material_3/E-Commerce-Customer-Churn.html). 
 
 ---
 
