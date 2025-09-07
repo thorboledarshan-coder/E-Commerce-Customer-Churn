@@ -55,7 +55,8 @@ churn-analysis/
 
 ---
 
-## 📎 Dataset  
+## 📎 Dataset
+“The dataset represents a **generic e-commerce company** (identity not disclosed). For this project, it will be treated as data from a mid-sized online retail platform.”
 Dataset: [E-commerce Customer Churn – Kaggle](https://www.kaggle.com/datasets/ankitverma2010/ecommerce-customer-churn-analysis-and-prediction)  
 
 ---
