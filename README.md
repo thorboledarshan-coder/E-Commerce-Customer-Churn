@@ -4,7 +4,9 @@
 This case study analyzes **customer churn** for an e-commerce company.  
 The goal is to identify the **key drivers of churn** and recommend **strategies to improve customer retention**.  
 
-The analysis is done in **R (RStudio)** using the **E-commerce Customer Churn dataset** from Kaggle.  
+The analysis is done in **R (RStudio)** using the **E-commerce Customer Churn dataset** from Kaggle. 
+
+[Your site is live at] (https://thorboledarshan-coder.github.io/E-Commerce-Customer-Churn/C:\Users\Lenovo\Desktop\Darshan\case study material_3)
 
  
 
